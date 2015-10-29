@@ -10,6 +10,8 @@ import UIKit
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
+    let picker = UIImagePickerController()
+    
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         let image = info[UIImagePickerControllerOriginalImage] as! UIImage
         let manager = NetworkManager.sharedManager
@@ -17,14 +19,19 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         picker.dismissViewControllerAnimated(true, completion: nil)
     }
 
+    @IBAction func chooseFromLibrary(sender: AnyObject) {
+        picker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        self.presentViewController(picker, animated: true, completion: nil)
+    }
+    
     @IBAction func takePicture(sender: AnyObject) {
-        let p = UIImagePickerController()
-        p.delegate = self
-        self.presentViewController(p, animated: true, completion: nil)
+        picker.sourceType = UIImagePickerControllerSourceType.Camera
+        self.presentViewController(picker, animated: true, completion: nil)
     }
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        picker.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
