@@ -32,6 +32,16 @@ class NetworkManager {
         manager.upload(.POST, "https://api.parse.com/1/files/pic.jpg", headers:["Content-Type": "image/jpeg"], data:data!).responseJSON { response in
             let json = JSON(response.result.value!)
             print(json)
+            let bodyParameters = [
+                "image": [
+                    "name": json["name"].stringValue,
+                    "__type": "File"
+                ]
+            ]
+            
+            let encoding = Alamofire.ParameterEncoding.JSON
+            self.manager.request(.POST, "https://api.parse.com/1/classes/Post", parameters: bodyParameters, encoding: encoding).validate(statusCode: 200..<300).responseJSON { response in
+            }
             
         }
     }
