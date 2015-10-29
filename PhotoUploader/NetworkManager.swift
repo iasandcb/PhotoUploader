@@ -29,7 +29,7 @@ class NetworkManager {
     func upload(image: UIImage) {
         // Fetch Request
         let data = UIImageJPEGRepresentation(image, 0.5)
-        manager.upload(.POST, "https://api.parse.com/1/files/pic.jpg", data:data!).responseJSON { response in
+        manager.upload(.POST, "https://api.parse.com/1/files/pic.jpg", headers:["Content-Type": "image/jpeg"], data:data!).responseJSON { response in
             let json = JSON(response.result.value!)
             print(json)
             
