@@ -1,0 +1,5 @@
+Pods/
+PhotoUploader.xcworkspace/
+PhotoUploader.xcodeproj/xcuserdata/
+PhotoUploader.xcodeproj/project.xcworkspace/xcuserdata/
+Podfile.lock
